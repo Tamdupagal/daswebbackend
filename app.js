@@ -8,7 +8,7 @@ require("./db/dataconnection");
 
 
 // importing routes
-const Mail = require('./routes/mail');
+// const Mail = require('./routes/mail');
 const registerRouter = require("./routes/registerRouter");
 const adminRouter = require("./routes/adminRoute");
 
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use("/api",Mail);
+// app.use("/api",Mail);
 app.use("/api",registerRouter);
 app.use("/api",adminRouter);
 

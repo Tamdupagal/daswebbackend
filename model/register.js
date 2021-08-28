@@ -20,7 +20,7 @@ const registrationSchema = new mongoose.Schema({
       }
     },
   },
-  password: {
+  phoneNumber: {
     type: String,
     trim: true,
   },
@@ -57,15 +57,15 @@ registrationSchema.statics.findByCredentials = async (email, password) => {
   return user;
 };
 
-registrationSchema.pre("save", async function (next) {
-  const user = this;
+// registrationSchema.pre("save", async function (next) {
+//   const user = this;
 
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 8);
-  }
+//   if (user.isModified("password")) {
+//     user.password = await bcrypt.hash(user.password, 8);
+//   }
 
-  next();
-});
+//   next();
+// });
 
 const Register = mongoose.model("Register", registrationSchema);
 

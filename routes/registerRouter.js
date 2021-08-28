@@ -1,15 +1,17 @@
 const express = require("express");
 const Register = require("../model/register");
 const router = new express.Router();
+const {sendWelcomeMail} = require("../email/mail")
 
 router.post("/register", async (req, res) => {
   const user = new Register({
     fullName: req.body.fullName,
     email: req.body.email,
-    password: req.body.password,
+    phoneNumber:req.body.phoneNumber,
   });
   try {
     await user.save();
+    sendWelcomeMail(req.body.fullName,req.body.email)
     res.send(user);
     // res.send("Data Save sucessfully");
     console.log(user);
