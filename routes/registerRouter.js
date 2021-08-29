@@ -5,9 +5,9 @@ const {sendWelcomeMail} = require("../email/mail")
 
 router.post("/register", async (req, res) => {
   const user = new Register({
-    fullName: req.body.fullName,
-    email: req.body.email,
-    phoneNumber:req.body.phoneNumber,
+    fullName: req.body.fname,
+    email: req.body.email1_id,
+    phoneNumber:req.body.mobile,
   });
   try {
     await user.save();
