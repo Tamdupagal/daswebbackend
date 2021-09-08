@@ -24,6 +24,12 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  course:{
+    type: String,
+  },
+  disposition:{
+    type:String
+  }
 });
 
 registrationSchema.statics.findUser = async (email, password) => {
