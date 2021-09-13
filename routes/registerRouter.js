@@ -1,17 +1,19 @@
 const express = require("express");
 const Register = require("../model/register");
+const expressAsyncHandler = require('express-async-handler')
 const router = new express.Router();
-const {sendWelcomeMail} = require("../email/mail")
+const { sendWelcomeMail } = require("../email/mail")
 
 router.post("/register", async (req, res) => {
   const user = new Register({
     fullName: req.body.fname,
-    email: req.body.email1_id,
-    phoneNumber:req.body.mobile,
+    email: req.body.email_id,
+    phoneNumber: req.body.mobile,
+    course:req.body.course,
   });
   try {
     await user.save();
-    sendWelcomeMail(req.body.fullName,req.body.email)
+    sendWelcomeMail(req.body.fullName, req.body.email)
     res.send(user);
     // res.send("Data Save sucessfully");
     console.log(user);
@@ -27,6 +29,7 @@ router.post("/login", async (req, res) => {
   );
   res.send(user);
 });
+
 
 router.get("/login", async (req, res) => {
   res.render("login");

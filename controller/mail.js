@@ -21,7 +21,7 @@ exports.sendMail = (req,res)=>{
         to: email_id,
         subject: 'Message',
         html: `<h1>userdata</h1>
-                <p>email_id: ${email_id}, mobile: ${mobile}, fname: ${fname}</p>        
+                <p>email_id: ${email_id}, mobile: ${mobile}, fname: ${fname}</p>      
         `
     }, (err, info) => {
         // console.log(info.envelope);

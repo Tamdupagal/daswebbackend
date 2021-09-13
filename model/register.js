@@ -24,38 +24,46 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  course:{
+    type: String,
+    trim: true,
+  },
+  disposition:{
+    type: String,
+    trim: true,
+  }
 });
 
-registrationSchema.statics.findUser = async (email, password) => {
-  const user = await Register.findOne({ email });
+// registrationSchema.statics.findUser = async (email, password) => {
+//   const user = await Register.findOne({ email });
 
-  if (!user) {
-    throw new Error("No user exists by this email!");
-  }
+//   if (!user) {
+//     throw new Error("No user exists by this email!");
+//   }
 
-  const hashedpassword = await bcrypt.hash(password, 8);
+//   const hashedpassword = await bcrypt.hash(password, 8);
 
-  user.password = hashedpassword;
+//   user.password = hashedpassword;
 
-  await user.save();
-  return user;
-};
+//   await user.save();
+//   return user;
+// };
 
-registrationSchema.statics.findByCredentials = async (email, password) => {
-  const user = await Register.findOne({ email });
+// registrationSchema.statics.findByCredentials = async (email, password) => {
+//   const user = await Register.findOne({ email });
 
-  if (!user) {
-    throw new Error("Did not find email");
-  }
+//   if (!user) {
+//     throw new Error("Did not find email");
+//   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+//   const isMatch = await bcrypt.compare(password, user.password);
 
-  if (!isMatch) {
-    throw new Error("Unable to login");
-  }
+//   if (!isMatch) {
+//     throw new Error("Unable to login");
+//   }
 
-  return user;
-};
+//   return user;
+// };
 
 // registrationSchema.pre("save", async function (next) {
 //   const user = this;
