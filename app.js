@@ -1,11 +1,16 @@
 require('dotenv').config();
 const express = require('express')
+const dbConnect = require("./config/dbConnect");
+const dotenv = require('dotenv');
 const app = express()
 const PORT = process.env.PORT | 5000;
 var cors = require('cors');
+var cookieParser = require('cookie-parser')
+// require("./config/dbConnect");
 
-require("./db/dataconnection");
-
+// DB connect
+dotenv.config();
+dbConnect();
 
 // importing routes
 // const Mail = require('./routes/mail');
@@ -13,6 +18,7 @@ const registerRouter = require("./routes/registerRouter");
 const adminRouter = require("./routes/adminRoute");
 
 app.use(cors());
+app.use(cookieParser())
 app.use(express.json());
 
 

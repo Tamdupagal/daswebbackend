@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 const adminDBSchema = new mongoose.Schema({
     name:{
@@ -10,8 +11,27 @@ const adminDBSchema = new mongoose.Schema({
         type:String,
         required:true,
         minLength:7
-    }
+    },
+    tokens:[{
+        token:{
+            type:String,
+            required:true
+        }
+    }]
 })
+
+adminDBSchema.methods.generateAuthToken= async function() {
+    try {
+        console.log(this._id);
+        const token = jwt.sign({_id:this._id.toString()},process.env.JWT_SECRET_KEY);
+        this.tokens = this.tokens.concat({token:token})
+        await this.save();
+        return token;
+    } catch (error) {
+        // res.send("the error part" + error);
+        console.log(error);
+    }
+}
 
 // adminDBSchema.statics.findByCredentials = async (name,password) =>{
 //     const user = await Admin.findOne({name})
